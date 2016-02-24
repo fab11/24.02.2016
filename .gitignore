@@ -1,0 +1,22 @@
+##impor
+library (foreign)
+require(foreign)
+baseEDO<-read.dbf("C:\\Users\\SALA-C26\\Downloads\\COE1T215.dbf")
+
+baseEDO$ENT1 <- as.numeric(as.character(baseEDO$ENT))
+Tabla1 <- subset(baseEDO, (ENT1==15))
+View(Tabla1)
+
+##attach(Tabla1)##para hacer que Tabla1 sea la base principal
+Tabla1$P3L<- ordered(Tabla1$P3L,levels = c("01","02","03","04","05","06","07","08","09","10","11","99"), labels = c("1persona","2 a 5 personas","6 a 10 personas","11 a 15 personas","16 a 20 personas","21 a 30 personas","31 a 50 personas","51 a 100 personas","101 a 250 personas","251 a 500 personas","500 y más personas","NO SABE"))
+View(P3L)
+table (Tabla1$P3L)
+
+Tabla1$P5<- ordered(Tabla1$P3L,levels = c("1","2","3","9"), labels = c("si","No trabajó la semana pasada","No se encontró en esa situación"," No sabe"))
+table(Tabla1$P5)
+
+Tabla1$P2E<- ordered(Tabla1$P3L,levels = c("1","2","3","4","5","6","9"), labels = c("una persona temporalmente ausente de su actividad u oficio?","pensionado o jubilado de su empleo?","estudiante?","una persona que se dedica a los quehaceres de su","una persona con alguna limitación física o mental que le impide trabajar por el resto de su vida?","Otra condición"," No sabe"))
+table (Tabla1$P2E)
+
+table(Tabla1$P5,Tabla1$P3L)
+table(Tabla1$P5,Tabla1$P2E)
